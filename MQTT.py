@@ -1,4 +1,5 @@
 import paho.mqtt.client as mqtt
+import threading
 
 
 class MQTT():
@@ -9,13 +10,13 @@ class MQTT():
         self.stay_disconnected = False
         self.disconnect = False
 
-    def createClient(self, name, sub):  ## Send
+    def createSender(self, name, sub):  ## Send
 
         def clientConnection(client, userdata, flags, rc):
             if rc == 0:
                 self.MQTT_Clients[name].subscribe(sub)
             else:
-                print("Client Failed to Connect")
+                print("Failed to Connect")
 
         def on_disconnect(client, userdata, rc):
             self.MQTT_Clients[name].loop_stop()
@@ -36,7 +37,7 @@ class MQTT():
             if rc == 0:
                 self.MQTT_Clients[name].subscribe(sub)
             else:
-                print("Robot Failed to Connect")
+                print("Failed to Connect")
 
         def messageDecoder(client, userdata, msg):
             message = msg.payload.decode(encoding='UTF-8')
@@ -61,5 +62,10 @@ class MQTT():
             except TypeError:
                 pass
 
-    def sendToApp(self, name, sub, message, qos=0):
+    def send(self, name, sub, message, qos=0):
         self.MQTT_Clients[name].publish(sub, message, qos=qos)
+
+    def createListener(self, name, sub):
+        threading.Thread(target=self.startClient, args=(name, sub,)).start()
+
+    
