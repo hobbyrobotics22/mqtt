@@ -1,12 +1,30 @@
-# mqtt_joystick
+# mqtt
 
-This app allows the ability to use your iPhone to send analog values to an MQTT broker for single or dual axis driven applications. These applications include:
+This respository is used to simplfiy the use of the mqtt protocall by using the python library paho-mqtt to create clients and subscribe to topics.
 
--	Differential drive robots 
--	2 DOF robotic arms
--	2 axis driven cameras.
--	Wireless video game controller
--	And much more!
+> Tested on Ubuntu 20.04 and Ubuntu 22.04
 
-Enhance your robotic development with the ability to send real-time data from your iPhone to your robot through any WIFI network providing the user has installed and developed controls using an MQTT mosquito server. 
+## Setup
+
+Start by installing the mosquitto mqtt broker and python libraries by running the setup.sh script
+
+```
+./setup.sh
+```
+
+## MQTT JoyStick App 
+
+Check out the mqtt_joystick.py file to see a demostration on how to subscribe to the and capture the messages sent from the MQTT JoyStick app avaiable for IOS on the app store.
+
+```
+python3 mqtt_joystick.py
+```
+
+
+
+
+
+
+
+
 
