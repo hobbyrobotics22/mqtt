@@ -32,7 +32,7 @@ class MQTT():
 
     def startClient(self, name, sub):  ## Listen
 
-        self.MQTT_Message[sub] = []
+        self.MQTT_Message[sub] = ""
 
         def connectionStatus(client, userdata, flags, rc):
             if rc == 0:
